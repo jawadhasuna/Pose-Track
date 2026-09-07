@@ -326,11 +326,14 @@ function toast(m){ const t=$('toast'); t.textContent=m; t.classList.add('show');
 //  MODEL
 // ══════════════════════════════════════════════════════════════
 async function getLandmarker(mode) {
-  const key = $('model').value;
+  const modelName = $('model').value;
   const n = +$('numPoses').value;
+  // numPoses is fixed when the detector is built — setOptions ignores it —
+  // so it has to be part of the cache key or "up to 4 people" never takes effect.
+  const key = modelName + ':' + n;
 
   if (S.landmarker && S.modelKey === key) {
-    await S.landmarker.setOptions({ runningMode: mode, numPoses: n });
+    await S.landmarker.setOptions({ runningMode: mode });
     return S.landmarker;
   }
 
@@ -345,7 +348,7 @@ async function getLandmarker(mode) {
     if (S.landmarker) { S.landmarker.close(); S.landmarker = null; }
 
     S.landmarker = await PoseLandmarker.createFromOptions(vision, {
-      baseOptions: { modelAssetPath: MODELS[key], delegate: 'GPU' },
+      baseOptions: { modelAssetPath: MODELS[modelName], delegate: 'GPU' },
       runningMode: mode,
       numPoses: n,
       minPoseDetectionConfidence: 0.4,
