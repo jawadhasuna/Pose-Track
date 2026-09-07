@@ -1,10 +1,10 @@
-# PoseTrack
+# Pose Track
 
 **Body keypoint detection that runs entirely in your browser.**
 
-### 🔗 Live site: <https://pose-track-six.vercel.app>
+### 🔗 Live site: <https://posestrack.vercel.app>
 
-Drop in a photo — or switch on your webcam — and PoseTrack finds 33 points on the
+Drop in a photo — or switch on your webcam — and Pose Track finds 33 points on the
 human body, draws the skeleton, and measures the angle at every major joint.
 
 No server, no upload, no account. Your photos and video never leave your device.
@@ -31,7 +31,7 @@ No server, no upload, no account. Your photos and video never leave your device.
 
 ## Important: it's trained on humans
 
-The model behind PoseTrack ([MediaPipe BlazePose](https://developers.google.com/mediapipe))
+The model behind Pose Track ([MediaPipe BlazePose](https://developers.google.com/mediapipe))
 was trained on photographs of **people**. Point it at a horse, a dog or a bird and it will
 produce confident nonsense — it will try to force a human skeleton onto whatever it sees.
 
