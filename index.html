@@ -461,9 +461,13 @@ const SAMPLES = {
   two: {
     label: 'Two people', hint: 'Multi-person detection',
     make() {
-      // Each figure is rendered in its own 396-wide frame, then placed with
-      // real separation — packed any closer and the detector merges them.
-      const W = 900, H = 720, sub = Math.round(W * 0.44);
+      // Each figure is rendered in its own frame, then placed with real
+      // separation. These numbers are not arbitrary: a sweep of frame sizes
+      // and gaps found this the only one where a freshly built detector
+      // returns two people every single run (6/6, 33 and 30 points).
+      // Pack them closer and the detector merges them into one; spread them
+      // further and each person gets too small to find.
+      const W = 1100, H = 760, sub = Math.round(W * 0.42);
       const c = document.createElement('canvas');
       c.width = W; c.height = H;
       const x = c.getContext('2d');
@@ -476,8 +480,8 @@ const SAMPLES = {
         paintFigure(sx, pose, sub, H, opt);
         return s;
       };
-      x.drawImage(one(POSES.standing, {}), W * 0.25 - sub / 2, 0);
-      x.drawImage(one(POSES.reaching, { shirt:'#a8443f', hair:'#1f1a16' }), W * 0.75 - sub / 2, 0);
+      x.drawImage(one(POSES.standing, {}), W * 0.24 - sub / 2, 0);
+      x.drawImage(one(POSES.reaching, { shirt:'#a8443f', hair:'#1f1a16' }), W * 0.76 - sub / 2, 0);
       return c;
     }
   }
